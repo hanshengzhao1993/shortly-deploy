@@ -17,6 +17,7 @@ module.exports = function(grunt) {
     nodemon: {
       dev: {
         script: 'server.js'
+        // script: 'start'
       }
     },
 
@@ -27,6 +28,16 @@ module.exports = function(grunt) {
       target: [
         // Add list of files to lint here
       ]
+    },
+
+    concat: {
+      options: {
+        separator: ';',
+      },
+      dist: {
+        src: ['public/client/*.js'],
+        dest: 'gruntFiles1/built.js',
+      },
     },
 
     cssmin: {
@@ -76,7 +87,9 @@ module.exports = function(grunt) {
     'mochaTest'
   ]);
 
-  grunt.registerTask('build', [
+  grunt.registerTask('concat1', ['concat']);
+
+  grunt.registerTask('build', ['nodemon'
   ]);
 
   grunt.registerTask('upload', function(n) {
@@ -89,6 +102,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('deploy', [
     // add your deploy tasks here
+    'build'  
   ]);
 
 
