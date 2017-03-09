@@ -35,7 +35,7 @@ window.Shortly = Backbone.View.extend({
     this.$el.find('.navigation li a')
       .removeClass('selected')
       .filter('.' + routeName)
-      .addClass('selected'       );;
+      .addClass('selected');
   }
 });
 ;Shortly.createLinkView = Backbone.View.extend({

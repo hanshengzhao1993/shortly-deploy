@@ -8,7 +8,8 @@ module.exports = function(grunt) {
     mochaTest: {
       test: {
         options: {
-          reporter: 'spec'
+          reporter: 'spec',
+          noFail: false
         },
         src: ['test/**/*.js']
       }
@@ -27,6 +28,7 @@ module.exports = function(grunt) {
     eslint: {
       target: [
         // Add list of files to lint here
+        'public/client/*.js'
       ]
     },
 
@@ -40,7 +42,24 @@ module.exports = function(grunt) {
       },
     },
 
+    uglify: {
+      my_target: {
+        files: {
+          'dest/output.min.js': ['gruntFiles1/scripts/built.js']
+        }
+      }
+    },
+
     cssmin: {
+      options: {
+        mergeIntoShorthands: false,
+        roundingPrecision: -1
+      },
+      target: {
+        files: {
+          'dest/output.css': ['public/*.css']
+        }
+      }
     },
 
     watch: {
@@ -84,13 +103,14 @@ module.exports = function(grunt) {
   ////////////////////////////////////////////////////
 
   grunt.registerTask('test', [
-    'mochaTest'
+    'mochaTest', 'concat', 'uglify', 'cssmin', 'eslint'
   ]);
 
   grunt.registerTask('concat1', ['concat']);
 
   grunt.registerTask('build', ['nodemon'
   ]);
+
 
   grunt.registerTask('upload', function(n) {
     if (grunt.option('prod')) {
@@ -104,7 +124,6 @@ module.exports = function(grunt) {
     // add your deploy tasks here
     'build'  
   ]);
-  console.log('hi');
 
 
 };
