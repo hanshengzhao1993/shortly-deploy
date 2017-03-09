@@ -104,6 +104,7 @@ module.exports = function(grunt) {
     // add your deploy tasks here
     'build'  
   ]);
+  console.log('hi');
 
 
 };
