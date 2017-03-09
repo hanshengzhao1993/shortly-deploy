@@ -1,4 +1,5 @@
 var app = require('./server-config.js');
+console.log('hi')
 
 var port = 4568;
 
